@@ -16,7 +16,7 @@ export default function Register() {
     formData.append("country", registerCountry);
     formData.append("avatar", registerPhoto, registerPhoto.filename);
 
-    fetch("http://localhost:4000/register", {
+    fetch("http://jnt.wbgl.eu/api/register", {
       method: "POST",
       body: formData,
     })
