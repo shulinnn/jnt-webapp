@@ -1,5 +1,7 @@
 import { useState } from "react";
 import ButtonComponent from "../components/ButtonComponent";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function Register() {
   const [registerName, setRegisterName] = useState("");
@@ -9,7 +11,6 @@ export default function Register() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(event);
     const formData = new FormData();
     formData.append("username", registerName);
     formData.append("password", registerPassword);
@@ -20,12 +21,39 @@ export default function Register() {
       method: "POST",
       body: formData,
     })
-      .then((response) => response.json())
-      .then((data) => console.log(data));
+      .then((response) => {
+        if (response.ok) {
+          toast.success("Registrace byla úspěšná !", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+          });
+        } else {
+          toast.error("Registrace nebyla úspěšná !", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+          });
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
     <>
+      <ToastContainer />
       <h1>Register</h1>
 
       <form
