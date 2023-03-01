@@ -65,7 +65,7 @@ export default function Register() {
           <label className="font-light text-base">Uživatelské Jméno</label>
           <input
             onChange={() => setRegisterName(event.target.value)}
-            className="shadow-inner bg-secondary outline-none border-none p-4 text-white placeholder:text-white"
+            className="shadow-inner bg-secondary outline-none border border-transparent transition-all duration-300 ease-in p-4 text-white placeholder:text-white"
             type="text"
             placeholder="Uživatelské jméno"
             autoComplete="true"
@@ -77,9 +77,10 @@ export default function Register() {
           <input
             onChange={() => setRegisterPassword(event.target.value)}
             type="password"
-            className="shadow-inner bg-secondary outline-none border-none p-4 text-white placeholder:text-white"
+            className="shadow-inner bg-secondary outline-none border border-transparent transition-all duration-300 ease-in p-4 text-white placeholder:text-white"
             placeholder="Heslo"
             autoComplete="true"
+            required
           />
         </div>
         <div className="flex flex-col gap-y-4">
@@ -365,6 +366,7 @@ export default function Register() {
             id="file-input"
             style={{ visibility: "hidden" }}
             type="file"
+            required
           />
         </div>
         <ButtonComponent text="REGISTROVAT SE" />
