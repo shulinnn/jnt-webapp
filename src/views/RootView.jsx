@@ -28,9 +28,7 @@ export default function Root() {
     } else {
       return (
         <div className="flex flex-row gap-x-2">
-          <Link to="/login">Login</Link>
-          or
-          <Link to="/register">Register</Link>
+          <Link to="/login">Login</Link>/<Link to="/register">Register</Link>
         </div>
       );
     }
