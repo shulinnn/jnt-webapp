@@ -54,38 +54,40 @@ export default function Register() {
   return (
     <>
       <ToastContainer />
-      <h1>Register</h1>
+      <h1 className="font-medium text-2xl">Registrace</h1>
 
       <form
         onSubmit={handleSubmit}
-        className="register"
+        className="flex flex-col gap-y-3 px-0 py-8"
         encType="multipart/form-data"
       >
-        <div className="input-group">
-          <label>Uživatelské Jméno</label>
+        <div className="flex flex-col gap-y-4">
+          <label className="font-light text-base">Uživatelské Jméno</label>
           <input
             onChange={() => setRegisterName(event.target.value)}
+            className="shadow-inner bg-secondary outline-none border-none p-4 text-white placeholder:text-white"
             type="text"
             placeholder="Uživatelské jméno"
             autoComplete="true"
             required
           />
         </div>
-        <div className="input-group">
-          <label>Heslo</label>
+        <div className="flex flex-col gap-y-4">
+          <label className="font-light text-base">Heslo</label>
           <input
             onChange={() => setRegisterPassword(event.target.value)}
             type="password"
+            className="shadow-inner bg-secondary outline-none border-none p-4 text-white placeholder:text-white"
             placeholder="Heslo"
             autoComplete="true"
-            required
           />
         </div>
-        <div className="input-group">
-          <label>Národnost</label>
+        <div className="flex flex-col gap-y-4">
+          <label className="font-light text-base">Národnost</label>
           <select
             onChange={() => setRegisterCountry(event.target.value)}
             required
+            className="shadow-inner bg-secondary outline-none border-none p-4 text-white placeholder:text-white"
           >
             <option value="AF">Afghanistan</option>
             <option value="AX">Åland Islands</option>
@@ -348,9 +350,12 @@ export default function Register() {
             <option value="ZW">Zimbabwe</option>
           </select>
         </div>
-        <div className="input-group">
-          <label>Fotka hráče</label>
-          <label htmlFor="file-input" className="file-input">
+        <div className="flex flex-col gap-y-4">
+          <label className="font-light text-base">Fotka hráče</label>
+          <label
+            htmlFor="file-input"
+            className="shadow-inner bg-secondary outline-none border-none text-sm font-normal p-4 text-white placeholder:text-white"
+          >
             Vyber si svou fotku
           </label>
           <input
@@ -360,7 +365,6 @@ export default function Register() {
             id="file-input"
             style={{ visibility: "hidden" }}
             type="file"
-            required
           />
         </div>
         <ButtonComponent text="REGISTROVAT SE" />

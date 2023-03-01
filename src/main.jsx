@@ -2,8 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Root from "./views/RootView";
-import "./index.css";
-import "./reset.css";
+import "./app.css";
 import Register from "./views/RegisterView";
 import Landing from "./views/LandingView";
 import RegisteredPlayers from "./views/RegisteredPlayersView";
@@ -12,6 +11,7 @@ import Profile from "./views/ProfileView";
 import Matches from "./views/MatchesView";
 import Match from "./views/MatchView";
 import Chat from "./views/ChatView";
+import CaseOpening from "./views/CaseOpening";
 
 const router = createBrowserRouter([
   {
@@ -30,6 +30,7 @@ const router = createBrowserRouter([
         path: "/",
         element: <Landing />,
       },
+      { path: "/opening", element: <CaseOpening /> },
       {
         path: "/players",
         element: <RegisteredPlayers />,
