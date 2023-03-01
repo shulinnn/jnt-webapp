@@ -1,31 +1,10 @@
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
-
-  color: white;
-
-  --color-primary: #1a1e21;
-  --color-secondary: #1f2628;
-  --color-overlay: rgba(0, 0, 0, 0.9);
-  --color-success: green;
-  --color-error: red;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 a {
   text-decoration: none;
   color: white;
-}
-
-body,
-html {
-  background-color: var(--color-primary);
 }
 
 .navbar {
@@ -133,8 +112,8 @@ form.login {
   flex-direction: row;
   padding: 16px 0px;
   justify-content: space-between;
-  flex-wrap: wrap;
   gap: 16px;
+  flex-wrap: wrap;
 }
 
 .input-group {
@@ -200,9 +179,9 @@ p {
 
 .registered-player {
   display: flex;
-  flex-direction: column;
-  row-gap: 8px;
   width: 30%;
+  flex-direction: column;
+  row-gap: 16px;
 }
 
 .registered-player > .bottom {

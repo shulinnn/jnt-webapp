@@ -2,13 +2,20 @@ import React from "react";
 import Flag from "react-world-flags";
 
 export default class RegisteredPlayer extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
   render() {
     return (
-      <div className="registered-player">
-        <img src="https://via.placeholder.com/150" />
-        <div className="bottom">
-          <Flag code={"cz"} height={"14px"} />
-          <span>name</span>
+      <div className="flex flex-col gap-y-4 w-[45%] md:w-1/5 lg:w-auto">
+        <img
+          style={{ width: 150, height: 150 }}
+          src={`http://jnt.wbgl.eu/api/${this.props.photo}`}
+        />
+        <div className="flex flex-row gap-x-2 items-center">
+          <Flag code={this.props.flag} height={"14px"} width={"20px"} />
+          <span>{this.props.username}</span>
         </div>
       </div>
     );
