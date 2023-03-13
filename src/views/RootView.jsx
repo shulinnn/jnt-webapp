@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Bell, Menu, X, Clipboard } from "react-feather";
 import { Outlet, Link } from "react-router-dom";
 import UserIcon from "../components/UserIconComponent";
@@ -7,6 +7,11 @@ export default function Root() {
   const [isMenuOpen, setMenuOpen] = useState(false);
   const [isLoggedIn, setLoggedIn] = useState(false);
 
+  useEffect(() => {
+    if (localStorage.getItem("user_data") != null) setLoggedIn(true);
+    else setLoggedIn(false);
+  }, []);
+
   // Probably better than using inline ternary inside the return
   const renderIcon = () => {
     if (!isMenuOpen) {
@@ -14,14 +19,17 @@ export default function Root() {
     } else return <X strokeWidth={1} onClick={() => setMenuOpen(false)} />;
   };
 
-  /// Only usable before we implement JWT login
+  const handleLogout = () => {
+    localStorage.removeItem("user_data");
+    window.location.assign("/login");
+    setMenuOpen(false);
+  };
+
   const handleAuth = () => {
     if (isLoggedIn) {
       return (
         <div className="flex flex-row items-center gap-x-2">
-          <Clipboard strokeWidth={1} />
-          <Bell strokeWidth={1} />
-          <UserIcon />
+          <UserIcon onClick={() => console.log("XD")} />
           {renderIcon()}
         </div>
       );
@@ -36,17 +44,19 @@ export default function Root() {
 
   return (
     <>
-      <div className="bg-secondary p-4 flex flex-row items-center relative justify-between z-10 shadow-md">
-        <div className="text-2xl font-normal">
-          <Link to="/">Logo</Link>
+      <div className="fixed z-20">
+        <div className="bg-secondary p-4 flex flex-row w-screen items-center relative justify-between z-10 shadow-md">
+          <div className="text-2xl font-normal">
+            <Link to="/">JNT</Link>
+          </div>
+          {handleAuth()}
         </div>
-        {handleAuth()}
       </div>
       <div
         className={
           isMenuOpen
-            ? "h-auto fixed w-screen transition-all duration-300 ease-in-out top-20 bottom-0 z-0 transform -translate-y-0"
-            : "h-auto fixed w-screen transition-all duration-300 ease-in-out top-20 bottom-0 z-0 transform -translate-y-[100vh]"
+            ? "h-auto fixed w-screen transition-all duration-300 ease-in-out top-16 bottom-0 z-10 transform -translate-y-0"
+            : "h-auto fixed w-screen transition-all duration-300 ease-in-out top-16 bottom-0 z-10 transform -translate-y-[100vh]"
         }
       >
         <div className="p-4 h-auto bg-secondary">
@@ -73,7 +83,13 @@ export default function Root() {
             </li>
             {isLoggedIn ? (
               <li className="text-lg font-medium">
-                <Link to="/players" onClick={() => setMenuOpen(false)}>
+                <Link
+                  to={
+                    "/profile/" +
+                    JSON.parse(localStorage.getItem("user_data")).id
+                  }
+                  onClick={() => setMenuOpen(false)}
+                >
                   Můj profil
                 </Link>
               </li>
@@ -82,7 +98,7 @@ export default function Root() {
             )}
             {isLoggedIn ? (
               <li className="text-lg font-medium">
-                <Link to="/players" onClick={() => setMenuOpen(false)}>
+                <Link to="/" onClick={() => handleLogout()}>
                   Odhlásit se
                 </Link>
               </li>
@@ -92,7 +108,7 @@ export default function Root() {
           </ul>
         </div>
       </div>
-      <div className="px-8 py-4">
+      <div className="p-4 relative top-16">
         <Outlet />
       </div>
     </>

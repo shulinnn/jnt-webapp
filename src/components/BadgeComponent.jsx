@@ -3,6 +3,7 @@ export default class BadgeComponent extends React.Component {
   render() {
     return (
       <span
+        onClick={this.props.onClick}
         style={{
           marginBottom: 16,
           display: "inline",
