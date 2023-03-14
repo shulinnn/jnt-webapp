@@ -39,11 +39,9 @@ export default function Chat() {
     })
       .then((response) => {
         if (response.ok) {
-          console.log("Message sent");
           setDataLoaded(false);
           setMessage("");
         } else {
-          console.log("Message not sent");
         }
       })
       .catch((error) => {

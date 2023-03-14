@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Bell, Menu, X, Clipboard } from "react-feather";
+import { Bell, Menu, X, Clipboard, DollarSign } from "react-feather";
 import { Outlet, Link } from "react-router-dom";
 import UserIcon from "../components/UserIconComponent";
 
@@ -29,6 +29,10 @@ export default function Root() {
     if (isLoggedIn) {
       return (
         <div className="flex flex-row items-center gap-x-2">
+          <div className="flex flex-row gap-x-2">
+            <DollarSign />
+            <span>2000</span>
+          </div>
           <UserIcon onClick={() => console.log("XD")} />
           {renderIcon()}
         </div>
@@ -79,6 +83,16 @@ export default function Root() {
             <li className="text-lg font-medium">
               <Link to="/chat" onClick={() => setMenuOpen(false)}>
                 Chat
+              </Link>
+            </li>
+            <li className="text-lg font-medium">
+              <Link to="/my-bets" onClick={() => setMenuOpen(false)}>
+                Moje sázky
+              </Link>
+            </li>
+            <li className="text-lg font-medium">
+              <Link to="/my-bets" onClick={() => setMenuOpen(false)}>
+                Moje zápasy
               </Link>
             </li>
             {isLoggedIn ? (
