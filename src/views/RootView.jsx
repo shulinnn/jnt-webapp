@@ -90,11 +90,6 @@ export default function Root() {
                 Moje sázky
               </Link>
             </li>
-            <li className="text-lg font-medium">
-              <Link to="/my-bets" onClick={() => setMenuOpen(false)}>
-                Moje zápasy
-              </Link>
-            </li>
             {isLoggedIn ? (
               <li className="text-lg font-medium">
                 <Link

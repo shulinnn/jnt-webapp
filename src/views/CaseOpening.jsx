@@ -51,6 +51,7 @@ export default function CaseOpening() {
   }
 
   async function rollCase() {
+    if (JSON.parse(localStorage.getItem("user_data").case_ticket == 0)) return;
     if (shouldMove) {
       console.log("U cant open two cases at once");
     } else {
@@ -76,6 +77,7 @@ export default function CaseOpening() {
             ) {
               if (i == winningNumber) {
                 await addGrayscaleFilter(i, 300 * index);
+                endOpening(winningNumber);
                 setShouldMove(false);
                 return;
               } else {
@@ -90,6 +92,26 @@ export default function CaseOpening() {
         }
       }
     }
+  }
+
+  function endOpening(winNumber) {
+    console.log(winNumber);
+    let possibleWinnings = {
+      1: 1,
+      2: 2,
+      3: 5,
+      4: 10,
+      5: 20,
+      6: 30,
+      7: 40,
+      8: 100,
+      9: 110,
+      10: 120,
+      11: 130,
+      12: 200,
+    };
+
+    console.log("U should win" + Object.values(possibleWinnings)[winNumber]);
   }
 
   const addGrayscaleFilter = async (img, delay) => {
