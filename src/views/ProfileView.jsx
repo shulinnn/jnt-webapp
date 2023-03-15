@@ -29,7 +29,7 @@ export default function Profile() {
       if (data.Team != null)
         return (
           <>
-            {data.Team.team_logo == "" ? (
+            {data.Team.team_logo != "" ? (
               <img
                 src={`http://jnt.wbgl.eu/api/${data.Team.team_logo}`}
                 style={{ width: 24, height: 24, borderRadius: "100%" }}
