@@ -22,9 +22,7 @@ export default function RegisteredPlayers() {
 
   useEffect(() => {
     if (!dataLoaded) {
-      setTimeout(() => {
-        fetchApi();
-      }, 2000);
+      fetchApi();
     }
   });
 
@@ -35,6 +33,7 @@ export default function RegisteredPlayers() {
       const c = (
         <RegisteredPlayer
           key={index}
+          userId={[data[index].id]}
           flag={data[index].user_flag}
           username={data[index].username}
           photo={data[index].user_photo}
