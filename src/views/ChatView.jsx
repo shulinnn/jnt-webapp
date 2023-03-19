@@ -62,6 +62,7 @@ export default function Chat() {
           senderTeam={data[index].sender.Team.team_logo}
           playerId={data[index].sender.id}
           teamId={data[index].sender.Team.id}
+          badges={data[index].sender.badge}
         />
       );
       tempArr.push(c);

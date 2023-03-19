@@ -14,9 +14,6 @@ export default function CaseOpening() {
   const [shouldMove, setShouldMove] = useState(false);
   const [selectedCase, setSelectedCase] = useState(0);
   const x = useRef();
-
-  console.log(Object.entries(caseDropImages)[1 - 1]);
-
   const renderImages = Object.entries(
     Object.entries(caseDropImages)[selectedCase][1]
   ).map((e, key) => (
@@ -51,46 +48,49 @@ export default function CaseOpening() {
   }
 
   async function rollCase() {
-    if (JSON.parse(localStorage.getItem("user_data").case_ticket == 0)) return;
-    if (shouldMove) {
-      console.log("U cant open two cases at once");
-    } else {
-      setShouldMove(true);
+    if (JSON.parse(localStorage.getItem("user_data")).case_ticket > 0) {
+      if (shouldMove) {
+        console.log("U cant open two cases at once");
+      } else {
+        setShouldMove(true);
 
-      const winningNumber = Math.floor(Math.random() * 11);
-      console.log(winningNumber);
-      for (let index = 0; index < 3; index++) {
-        for (
-          let i = 0;
-          i <
-          Object.entries(Object.entries(caseDropImages)[selectedCase][1])
-            .length;
-          i++
-        ) {
-          if (index == 2) {
-            for (
-              let i = 0;
-              i <
-              Object.entries(Object.entries(caseDropImages)[selectedCase][1])
-                .length;
-              i++
-            ) {
-              if (i == winningNumber) {
-                await addGrayscaleFilter(i, 300 * index);
-                endOpening(winningNumber);
-                setShouldMove(false);
-                return;
-              } else {
-                await addGrayscaleFilter(i, 300 * index);
-                await removeGrayscaleFilter(i, 300 * index);
+        const winningNumber = Math.floor(Math.random() * 11);
+        console.log(winningNumber);
+        for (let index = 0; index < 3; index++) {
+          for (
+            let i = 0;
+            i <
+            Object.entries(Object.entries(caseDropImages)[selectedCase][1])
+              .length;
+            i++
+          ) {
+            if (index == 2) {
+              for (
+                let i = 0;
+                i <
+                Object.entries(Object.entries(caseDropImages)[selectedCase][1])
+                  .length;
+                i++
+              ) {
+                if (i == winningNumber) {
+                  await addGrayscaleFilter(i, 300 * index);
+                  endOpening(winningNumber);
+                  setShouldMove(false);
+                  return;
+                } else {
+                  await addGrayscaleFilter(i, 300 * index);
+                  await removeGrayscaleFilter(i, 300 * index);
+                }
               }
+            } else {
+              await addGrayscaleFilter(i, 300 * index);
+              await removeGrayscaleFilter(i, 300 * index);
             }
-          } else {
-            await addGrayscaleFilter(i, 300 * index);
-            await removeGrayscaleFilter(i, 300 * index);
           }
         }
       }
+    } else {
+      console.log("no tickets..");
     }
   }
 
@@ -112,7 +112,37 @@ export default function CaseOpening() {
     };
 
     console.log("U should win" + Object.values(possibleWinnings)[winNumber]);
+    /// send data to server add wartokens
+    sendData(Object.values(possibleWinnings)[winNumber]);
   }
+
+  const sendData = (winAmount) => {
+    console.log("Called");
+    console.log(winAmount);
+
+    let fD = new FormData();
+
+    fD.append("winAmount", winAmount);
+    fD.append("betterId", JSON.parse(localStorage.getItem("user_data")).id);
+
+    const requestOptions = {
+      method: "POST",
+      body: fD,
+    };
+
+    console.log(requestOptions.body);
+
+    fetch("http://jnt.wbgl.eu/api/opening-win", requestOptions)
+      .then((response) => {
+        if (response.ok) {
+          console.log("good");
+        } else {
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   const addGrayscaleFilter = async (img, delay) => {
     document.getElementById(img).classList.add("grayscale-0");

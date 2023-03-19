@@ -7,7 +7,7 @@ export default class UserIcon extends React.Component {
   render() {
     return (
       <div
-        className="rounded-full w-6 h-6 bg-secondary bg-center bg-contain bg-no-repeat"
+        className="rounded-full w-8 h-8 bg-secondary bg-center bg-contain bg-no-repeat"
         style={{
           backgroundImage: `url(http://jnt.wbgl.eu/api/${
             JSON.parse(localStorage.getItem("user_data")).user_photo

@@ -12,6 +12,8 @@ import Matches from "./views/MatchesView";
 import Match from "./views/MatchView";
 import Chat from "./views/ChatView";
 import CaseOpening from "./views/CaseOpening";
+import Team from "./views/TeamView";
+import MyBets from "./views/MyBets";
 
 const router = createBrowserRouter([
   {
@@ -46,6 +48,14 @@ const router = createBrowserRouter([
       {
         path: "/match/:id",
         element: <Match />,
+      },
+      {
+        path: "/team/:id",
+        element: <Team />,
+      },
+      {
+        path: "/my-bets",
+        element: <MyBets />,
       },
       {
         path: "/chat",

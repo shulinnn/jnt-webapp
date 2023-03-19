@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import BadgeComponent from "../components/BadgeComponent";
 import ButtonComponent from "../components/ButtonComponent";
@@ -92,22 +92,21 @@ export default function Match() {
   const renderTeam = (id) => {
     if (dataLoaded && data.teams != null) {
       return data.teams[id].players.map((item, key) => (
-        <div
-          className="flex flex-row justify-center items-center gap-x-3"
-          key={key}
-        >
-          <img
-            src={`http://jnt.wbgl.eu/api/${data.teams[id].team_logo}`}
-            width={32}
-            height={32}
-          />
-          <img
-            src={`http://jnt.wbgl.eu/api/${item.user_photo}`}
-            width={32}
-            height={32}
-          />
-          <span>{item.username}</span>
-        </div>
+        <Link to={`/profile/${item.id}`} key={key}>
+          <div className="flex flex-row justify-center items-center gap-x-3">
+            <img
+              src={`http://jnt.wbgl.eu/api/${data.teams[id].team_logo}`}
+              width={32}
+              height={32}
+            />
+            <img
+              src={`http://jnt.wbgl.eu/api/${item.user_photo}`}
+              width={32}
+              height={32}
+            />
+            <span>{item.username}</span>
+          </div>
+        </Link>
       ));
     }
   };

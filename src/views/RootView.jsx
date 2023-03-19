@@ -30,8 +30,10 @@ export default function Root() {
       return (
         <div className="flex flex-row items-center gap-x-2">
           <div className="flex flex-row gap-x-2">
-            <DollarSign />
-            <span>2000</span>
+            <DollarSign width={20} />
+            <span>
+              {JSON.parse(localStorage.getItem("user_data")).betting_points}
+            </span>
           </div>
           <UserIcon onClick={() => console.log("XD")} />
           {renderIcon()}

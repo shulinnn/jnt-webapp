@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Flag from "react-world-flags";
 import MatchComponent from "../components/MatchComponent";
 import { countries } from "country-data";
@@ -41,7 +41,9 @@ export default function Profile() {
               />
             )}
 
-            <span className="text-lg">{data.Team.team_name}</span>
+            <Link to={`/team/${data.Team.id}`} className="text-lg">
+              {data.Team.team_name}
+            </Link>
           </>
         );
       else
@@ -94,7 +96,9 @@ export default function Profile() {
       <h1 className="font-medium text-2xl">Profil</h1>
       <div className="flex flex-col">
         <img
-          src={`http://jnt.wbgl.eu/api/${data.user_photo}`}
+          src={
+            dataLoaded ? `http://jnt.wbgl.eu/api/${data.user_photo}` : "null"
+          }
           style={{ width: 150, height: 150 }}
           className="mt-8 mb-8 self-center"
         />
